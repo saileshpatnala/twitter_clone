@@ -1,0 +1,16 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.odd {
+  background-color: #797e87;
+}
+
+.even {
+  background-color: #00B7FF;
+}
