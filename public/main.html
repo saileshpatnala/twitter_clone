@@ -1,5 +1,5 @@
 <div class="clearfix">
-  <form ng-Submit="post()">
+  <form ng-submit="post()" ng-show="authenticated" novalidate>
     <h4 ng-show="authenticated">{{currentUser}} says </h4>
     <input required type="text" class="form-control" placeholder="Your name" ng-model="newPost.created_by" ng-hide="authenticated"/>
     <textarea required class="form-control" maxlength="200" rows="3" placeholder="Say something" ng-model="newPost.text"></textarea>

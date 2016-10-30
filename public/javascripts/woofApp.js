@@ -1,4 +1,4 @@
-var app = angular.module('woofApp', ['ngRoute']).run(function($http, $rootScope){
+var app = angular.module('woofApp', ['ngRoute', 'ngResource']).run(function($rootScope){
   $rootScope.authenticated = false;
   $rootScope.currentUser = ' ';
 
@@ -28,26 +28,21 @@ app.config(function($routeProvider){
     });
 });
 
-app.factory('postService', function($http){
-  var factory = {};
-  factory.getAll = function() {
-    return $http.get('/api/posts');
-  };
-  return factory;
+app.factory('postService', function($resource){
+  return $resource('/api/posts/:id');
 })
 
-app.controller('mainController', function($scope, postService){
-  $scope.posts = [];
+app.controller('mainController', function($rootScope, $scope, postService){
+  $scope.posts = postService.query();
   $scope.newPost = {created_by: '', text: '', created_at: ''};
 
-  postService.getAll().success(function(data){
-    $scope.posts = data;
-  });
-
-  $scope.post = function(){
+  $scope.post = function() {
+    $scope.newPost.created_by = $rootScope.currentUser;
     $scope.newPost.created_at = Date.now();
-    $scope.posts.push($scope.newPost);
-    $scope.newPost = {created_by: '', text: '', created_at: ''};
+    postService.save($scope.newPost, function(){
+      $scope.posts = postService.query();
+      $scope.newPost = {created_by: '', text: '', created_at: ''};
+    });
   };
 });
 

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var userSchema = new mongoose.Schema({
   username: String,
@@ -7,7 +8,7 @@ var userSchema = new mongoose.Schema({
 });
 
 var postSchema = new mongoose.Schema({
-  username: String,
+  created_by: String,
   created_at: {type: Date, default: Date.now},
   text: String
 });
