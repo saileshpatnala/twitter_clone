@@ -37,7 +37,7 @@ app.factory('postService', function($http){
 })
 
 app.controller('mainController', function($scope, postService){
-  $scope.posts = []
+  $scope.posts = [];
   $scope.newPost = {created_by: '', text: '', created_at: ''};
 
   postService.getAll().success(function(data){
