@@ -1,12 +1,12 @@
-var app = angular.module('woofApp', ['ngRoute', 'ngResource']).run(function($rootScope){
+var app = angular.module('woofApp', ['ngRoute', 'ngResource']).run(function($rootScope, $http){
   $rootScope.authenticated = false;
   $rootScope.currentUser = ' ';
 
   $rootScope.logout = function(){
-    $http.get('/auth/signout')
+    $http.get('/auth/signout');
     $rootScope.authenticated = false;
     $rootScope.currentUser = ' ';
-  }
+  };
 });
 
 app.config(function($routeProvider){
